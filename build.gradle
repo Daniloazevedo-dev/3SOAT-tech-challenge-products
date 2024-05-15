@@ -132,9 +132,9 @@ jacocoTestCoverageVerification {
 
 sonar {
 	properties {
-		property "sonar.projectKey", "danilo-tech-challenge-products"
+		property "sonar.projectKey", "danilo-ms-products_tech-challenge-products"
 		property "sonar.projectName", "tech-challenge-products"
-		property "sonar.organization", "danilo-tech-challenge-products"
+		property "sonar.organization", "danilo-ms-products"
 		property "sonar.host.url", "https://sonarcloud.io"
 		property 'sonar.coverage.jacoco.xmlReportPaths', "build/reports/jacoco/test/jacocoTestReport.xml"
 	}
