@@ -138,6 +138,26 @@ class ProdutoControllerTest {
                 .andExpect(status().isNoContent());
     }
 
+    @DisplayName("Deve buscar um produto por id com sucesso")
+    @Test
+    void shouldFetchAProductByIdSuccessfully() throws Exception {
+        mockMvc.perform(get(ROTA_PRODUTOS + "/100")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
+
+    @DisplayName("Deve retornar status NotFound quando o produto não é encontrado")
+    @Test
+    void shouldReturnStatusNotFoundWhenProductIsNotFound() throws Exception {
+        mockMvc.perform(get(ROTA_PRODUTOS + "/1")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isNotFound());
+    }
+
     private ProdutoDTO setProdutoDTO() {
         return ProdutoDTO.builder()
                 .id(2L)

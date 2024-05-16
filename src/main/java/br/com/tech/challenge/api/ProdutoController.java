@@ -2,6 +2,7 @@ package br.com.tech.challenge.api;
 
 import br.com.tech.challenge.domain.dto.ProdutoDTO;
 import br.com.tech.challenge.domain.dto.ProdutoUpdateDTO;
+import br.com.tech.challenge.domain.entidades.Produto;
 import br.com.tech.challenge.servicos.ProdutoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -29,7 +30,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
 
-import static org.springframework.http.HttpStatus.CREATED;
+import java.util.Optional;
+
+import static org.springframework.http.HttpStatus.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -111,6 +114,19 @@ public class ProdutoController {
     public ResponseEntity<Void> delete(@PathVariable("id") final Long id) {
         produtoService.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @Operation(description = "Endpoint para obter um Produto por id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Produto encontrado com sucesso."),
+            @ApiResponse(responseCode = "404", description = "Produto não encontrado."),
+            @ApiResponse(responseCode = "500", description = "Ocorreu um erro no servidor.")
+    })
+    @GetMapping("/{id}")
+    public ResponseEntity<ProdutoDTO> findById(@PathVariable("id") final Long id) {
+        Optional<Produto> produto = produtoService.findById(id);
+        return produto.map(value -> ResponseEntity.status(OK).body(mapper.map(value, ProdutoDTO.class)))
+                .orElseGet(() -> ResponseEntity.status(NOT_FOUND).build());
     }
 
 }
