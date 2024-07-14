@@ -45,5 +45,3 @@ logging:
 
 security:
   jwt:
-
-
