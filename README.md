@@ -67,7 +67,6 @@ Para execução do projeto utilizando a arquitetura do Kubernetes localmente, si
   tech-challenge-java-64df984894-s5pdr   1/1     Running   0          5m10s
   ````
 - Após a completa inicialização dos serviços, a aplicação estará disponível localmente pela URL `http://localhost:31808/swagger-ui/index.html#/`
-- O microserviço possui integração com a ferramenta Spring Actuator, que fornece ferramentas para monitoramento da aplicação. Para obter um resumo da saúde da aplicação, basta acessar a URL `http://localhost:31808/actuator/health`
 - Após as validações desejadas, para finalizar a execução dos pods, basta executar os comandos a seguir em ordem:
   - `kubectl delete deployment tech-challenge-java` - Microserviço Java
   - `kubectl delete deployment redis` - Cache Redis
